@@ -1,3 +1,5 @@
+import "https://github.com/ethereum/dapp-bin/blob/master/library/stringUtils.sol";
+
 library StringUtils {
     /// @dev Does a byte-by-byte lexicographical comparison of two strings.
     /// @return a negative number if `_a` is smaller, zero if they are equal
@@ -52,4 +54,13 @@ library StringUtils {
     		return -1;
     	}	
     }
+    
+    function substring(string memory str, uint startIndex, uint endIndex) private pure returns (string memory) {
+        bytes memory strBytes = bytes(str);
+        bytes memory result = new bytes(endIndex-startIndex);
+        for(uint i = startIndex; i < endIndex; i++) {
+        result[i-startIndex] = strBytes[i];
+    }
+    return string(result);
+}
 }
